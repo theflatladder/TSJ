@@ -1,0 +1,54 @@
+﻿@model TSJCommunication.Models.Polls
+@{
+    Layout = null;
+}
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+@using (Html.BeginForm())
+{
+    @Html.Label("Название ")
+    @Html.TextBoxFor(m => m.Title)
+    <br />
+    <br />
+    @Html.Label("Описание ")
+    @Html.TextAreaFor(m => m.Description)
+    <br />
+    <br />
+    @Html.Label("Множественный выбор ")
+    @Html.CheckBoxFor(m => m.MultipleChoice)
+    <br />
+    <br />
+    @Html.Label("Варианты")
+    <input type="button" id="AddOption" value="Добавить вариант" />
+    <br />
+    <div id="OptionsContainer">
+
+    </div>
+    <br />
+    <br />
+    <input type="submit" value="Создать" />
+}
+
+
+
+<script>
+    $("#AddOption").click(function () {
+        var div = $("<div />");
+
+        var newOption = $("<input />").attr("type", "textbox").attr("name", "options");
+        newOption.val("");
+        div.append(newOption);
+
+        var removeButton = $("<input />").attr("type", "button").attr("value", "х").attr("onclick", "RemoveOption(this)");
+        div.append(removeButton);
+
+        $("#OptionsContainer").append(div);
+
+    });
+
+
+    function RemoveOption(button) {
+        $(button).parent().remove();
+    }
+</script>
