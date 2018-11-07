@@ -184,6 +184,10 @@
     <Compile Include="Migrations\201810091422148_qqe.Designer.cs">
       <DependentUpon>201810091422148_qqe.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810311149129_aaaaa.cs" />
+    <Compile Include="Migrations\201810311149129_aaaaa.Designer.cs">
+      <DependentUpon>201810311149129_aaaaa.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Options.cs" />
     <Compile Include="Models\Polls.cs" />
@@ -231,6 +235,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Polls\Index.cshtml" />
     <Content Include="Views\Polls\Add.cshtml" />
+    <Content Include="Views\Polls\Edit.cshtml" />
+    <Content Include="Views\Polls\Vote.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -266,6 +272,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810091422148_qqe.resx">
       <DependentUpon>201810091422148_qqe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810311149129_aaaaa.resx">
+      <DependentUpon>201810311149129_aaaaa.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

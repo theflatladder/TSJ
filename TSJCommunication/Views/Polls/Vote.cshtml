@@ -1,0 +1,38 @@
+﻿
+@{
+    Layout = null;
+    TSJCommunication.Models.Polls poll = ViewBag.Poll as TSJCommunication.Models.Polls;
+    List<TSJCommunication.Models.Options> options = ViewBag.Options as List<TSJCommunication.Models.Options>;
+}
+<h4>VOTING</h4>
+<h2>@poll.Title</h2>
+<h3>@poll.Description</h3>
+
+@using (Html.BeginForm())
+{
+    if (poll.MultipleChoice)
+    {
+        foreach (var option in options)
+        {
+            <div>
+                @*<input type="checkbox" name="results" id="results" />*@
+                @Html.Hidden("amountOfOptions", options.Count)
+                @Html.CheckBox("results", false)
+                <label for="results">@option.Value</label>
+            </div>
+        }
+    }
+    else
+    {
+        foreach (var option in options)
+        {
+            <div>
+                <input type="radio" name="results" id="results" value="true" checked />
+                @*@Html.RadioButton("results", false)*@
+                <label for="results">@option.Value</label>
+            </div>
+        }
+    }
+
+    <input type="submit" value="Проголосовать" />
+}

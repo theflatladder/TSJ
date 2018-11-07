@@ -23,9 +23,9 @@ namespace TSJCommunication.Models
         public int PollId { get; set; }
 
         /// <summary>
-        /// Индекс выбранного варианта (для списка Options в таблице Polls)
+        /// Id из таблицы Options которое пользователь выбрал
         /// </summary>
-        public int OptionIndex { get; set; }
+        public int OptionId { get; set; }
 
         
     }

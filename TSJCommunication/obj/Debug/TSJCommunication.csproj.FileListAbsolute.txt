@@ -109,3 +109,4 @@ C:\Users\Александр\Dropbox\VisualStudioProjects\TSJCommunication\TSJCom
 C:\Users\Александр\Dropbox\VisualStudioProjects\TSJCommunication\TSJCommunication\TSJCommunication\obj\Debug\TSJCommunication.Migrations.asd.resources
 C:\Users\Александр\Dropbox\VisualStudioProjects\TSJCommunication\TSJCommunication\TSJCommunication\obj\Debug\TSJCommunication.Migrations.dsa.resources
 C:\Users\Александр\Dropbox\VisualStudioProjects\TSJCommunication\TSJCommunication\TSJCommunication\obj\Debug\TSJCommunication.Migrations.qqe.resources
+C:\Users\Александр\Dropbox\VisualStudioProjects\TSJCommunication\TSJCommunication\TSJCommunication\obj\Debug\TSJCommunication.Migrations.aaaaa.resources

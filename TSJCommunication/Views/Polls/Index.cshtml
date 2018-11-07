@@ -3,45 +3,30 @@
     ViewBag.Title = "Index";
     Layout = null;
     List<TSJCommunication.Models.Polls> polls = (List<TSJCommunication.Models.Polls>)ViewBag.Polls;
-    List<TSJCommunication.Models.Options> options = (List<TSJCommunication.Models.Options>)ViewBag.Options;
 }
 
 
 <h2>POLLS</h2>
+
 <div style="padding:100px;">
     <a href="/Polls/Add">New poll</a>
 </div>
-@*не вот это вот все а список голосовалок*@
-@foreach (var poll in polls)
+
+@if (User.IsInRole("admin"))
 {
-    <div style="padding:30px;">
-        <div>@poll.Title</div>
-        <div>@poll.Description</div>
-        @if (poll.MultipleChoice)
-        {
-            foreach (var option in options)
-            {
-                if (option.PollId == poll.Id)
-                {
-                    <div>
-                        <input type="checkbox" id="option" />
-                        <label for="option">@option.Value</label>
-                    </div>
-                }
-            }
-        }
-        else
-        {
-            foreach (var option in options)
-            {
-                if (option.PollId == poll.Id)
-                {
-                    <div>
-                        <input type="radio" id="option" />
-                        <label for="option">@option.Value</label>
-                    </div>
-                }
-            }
-        }
-    </div>
+    foreach (var poll in polls)
+    {
+        <div>
+            <a href="/Polls/Edit/@poll.Id">@poll.Title</a>
+        </div>
+    }
+}
+else
+{
+    foreach (var poll in polls)
+    {
+        <div>
+            <a href="/Polls/Vote/@poll.Id">@poll.Title</a>
+        </div>
+    }
 }
