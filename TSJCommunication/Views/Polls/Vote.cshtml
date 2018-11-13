@@ -6,7 +6,7 @@
     List<TSJCommunication.Models.Votes> votes = ViewBag.Votes as List<TSJCommunication.Models.Votes>;
     int userId = (int)ViewBag.UserId;
 }
-@if (!votes.Any(c => c.UserId == userId))
+@if (!votes.Any(c => c.UserId == userId) && !User.IsInRole("admin"))
 {
     <h4>VOTING</h4>
     <h2>@poll.Title</h2>

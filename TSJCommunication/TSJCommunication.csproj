@@ -235,7 +235,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Polls\Index.cshtml" />
     <Content Include="Views\Polls\Add.cshtml" />
-    <Content Include="Views\Polls\Edit.cshtml" />
     <Content Include="Views\Polls\Vote.cshtml" />
   </ItemGroup>
   <ItemGroup>

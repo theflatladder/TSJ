@@ -12,21 +12,10 @@
     <a href="/Polls/Add">NEW POLL</a>
 </div>
 
-@if (User.IsInRole("admin"))
+@foreach (var poll in polls)
 {
-    foreach (var poll in polls)
-    {
-        <div>
-            <a href="/Polls/Edit/@poll.Id">@poll.Title</a>
-        </div>
-    }
+    <div>
+        <a href="/Polls/Vote/@poll.Id">@poll.Title</a>
+    </div>
 }
-else
-{
-    foreach (var poll in polls)
-    {
-        <div>
-            <a href="/Polls/Vote/@poll.Id">@poll.Title</a>
-        </div>
-    }
-}
+

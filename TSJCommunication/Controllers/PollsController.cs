@@ -54,37 +54,7 @@ namespace TSJCommunication.Controllers
         }
 
         #endregion
-
-        //not done!
-        #region Edit
-
-        public ActionResult Edit(int? id = null)
-        {
-            ViewBag.Id = id;
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Edit(Polls newPoll, List<string> options)
-        {
-            /*
-            using (DataContext context = new DataContext())
-            {
-                context.Polls.Add(newPoll);
-                context.SaveChanges();
-
-                foreach (var option in options)
-                {
-                    context.Options.Add(new Options() { PollId = newPoll.Id, Value = option });
-                }
-                context.SaveChanges();
-            }
-            */
-            return Redirect("/Polls");
-        }
-
-        #endregion
-
+        
 
         #region Vote
 
