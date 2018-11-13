@@ -13,7 +13,7 @@ namespace TSJCommunication.Controllers
     {
         public ActionResult Index()
         {
-            return RedirectPermanent("/Polls");
+            return Redirect("/Polls");
         }
 
     }

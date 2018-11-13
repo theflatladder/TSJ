@@ -3,36 +3,58 @@
     Layout = null;
     TSJCommunication.Models.Polls poll = ViewBag.Poll as TSJCommunication.Models.Polls;
     List<TSJCommunication.Models.Options> options = ViewBag.Options as List<TSJCommunication.Models.Options>;
+    List<TSJCommunication.Models.Votes> votes = ViewBag.Votes as List<TSJCommunication.Models.Votes>;
+    int userId = (int)ViewBag.UserId;
 }
-<h4>VOTING</h4>
-<h2>@poll.Title</h2>
-<h3>@poll.Description</h3>
-
-@using (Html.BeginForm())
+@if (!votes.Any(c => c.UserId == userId))
 {
-    if (poll.MultipleChoice)
-    {
-        foreach (var option in options)
-        {
-            <div>
-                @*<input type="checkbox" name="results" id="results" />*@
-                @Html.Hidden("amountOfOptions", options.Count)
-                @Html.CheckBox("results", false)
-                <label for="results">@option.Value</label>
-            </div>
-        }
-    }
-    else
-    {
-        foreach (var option in options)
-        {
-            <div>
-                <input type="radio" name="results" id="results" value="true" checked />
-                @*@Html.RadioButton("results", false)*@
-                <label for="results">@option.Value</label>
-            </div>
-        }
-    }
+    <h4>VOTING</h4>
+    <h2>@poll.Title</h2>
+    <h3>@poll.Description</h3>
 
-    <input type="submit" value="Проголосовать" />
+    using (Html.BeginForm())
+    {
+        if (poll.MultipleChoice)
+        {
+            foreach (var option in options)
+            {
+                <div>
+                    @Html.Hidden("amountOfOptions", options.Count)
+                    @Html.Hidden("pollId", poll.Id)
+                    @Html.CheckBox("results", false)
+                    <label for="results">@option.Value</label>
+                </div>
+            }
+        }
+        else
+        {
+            foreach (var option in options)
+            {
+                <div>
+                    @Html.Hidden("amountOfOptions", options.Count)
+                    @Html.Hidden("pollId", poll.Id)
+                    @Html.RadioButton("radioResults", option.Id)
+                    @Html.Hidden("results", false)
+                    <label for="results">@option.Value</label>
+                </div>
+            }
+        }
+
+        <input type="submit" value="Проголосовать" />
+    }
 }
+else
+{
+    <h4>RESULTS OF VOTING</h4>
+    <h2>@poll.Title</h2>
+    <h3>@poll.Description</h3>
+
+    for (int i = 0; i < options.Count; i++)
+    {
+        <div>
+            @options[i].Value - <b>@(Math.Round((double)(votes.Where(c => c.OptionId == options[i].Id).Count() * 100 / (double)votes.Count), 2))%</b> @votes.Where(c => c.OptionId == options[i].Id).Count() голоса(ов)
+        </div>
+    }
+}
+<br/>
+<a href="/Polls">return to Polls</a>

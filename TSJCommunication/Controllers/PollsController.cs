@@ -10,10 +10,12 @@ namespace TSJCommunication.Controllers
 {
     public class PollsController : Controller
     {
+        private int userId = 0;
+
         public ActionResult Index()
         {
             if (Request.Url.AbsolutePath == "/Polls/Index" || Request.Url.AbsolutePath == "/polls")
-                return RedirectPermanent("/Polls");
+                return Redirect("/Polls");
 
             List<Polls> polls = null;
             using (DataContext context = new DataContext())
@@ -24,6 +26,9 @@ namespace TSJCommunication.Controllers
 
             return View();
         }
+
+        
+        #region Add
 
         public ActionResult Add()
         {
@@ -45,11 +50,13 @@ namespace TSJCommunication.Controllers
                 context.SaveChanges();
             }
 
-            return RedirectPermanent("/Polls");
+            return Redirect("/Polls");
         }
 
+        #endregion
 
-
+        //not done!
+        #region Edit
 
         public ActionResult Edit(int? id = null)
         {
@@ -73,34 +80,57 @@ namespace TSJCommunication.Controllers
                 context.SaveChanges();
             }
             */
-            return RedirectPermanent("/Polls");
+            return Redirect("/Polls");
         }
 
+        #endregion
 
 
-
+        #region Vote
 
         public ActionResult Vote(int? id = null)
         {
             using (DataContext context = new DataContext())
             {
                 ViewBag.Poll = context.Polls.FirstOrDefault(c => c.Id == id);
-                ViewBag.Options = context.Options.Where(c => c.PollId == id).ToList();
+                ViewBag.Options = context.Options.Where(c => c.PollId == id).OrderBy(c => c.Id).ToList();
+                ViewBag.Votes = context.Votes.Where(c => c.PollId == id).ToList();
+                ViewBag.UserId = userId;
             }
-            if (ViewBag.Poll == null || ViewBag.Options == null) RedirectPermanent("/Polls");
+            if (ViewBag.Poll == null || ViewBag.Options == null) Redirect("/Polls");
 
             return View();
         }
 
         [HttpPost]
-        public ActionResult Vote(List<bool> results, int amountOfOptions)
+        public ActionResult Vote(List<bool> results, int amountOfOptions, int pollId, FormCollection formCollection)
         {
-            //amount of false = amountOfOptions. нужно true посчитать и понять, какие это именно варианты.
-            //и это только чекбоксы.
+            using (DataContext context = new DataContext())
+            {
+                if (context.Polls.First(c => c.Id == pollId).MultipleChoice)
+                {
+                    var options = context.Options.Where(c => c.PollId == pollId).OrderBy(c => c.Id).ToList();
 
-            //ебаные радиобаттоны и чекбоксы. первые не читаются, вторые через раз отдают хайден инпут, хуй распарсишь...
-            return RedirectPermanent("/Polls");
+                    for (int i = 0, optionsIndex = 0; i < results.Count; i++, optionsIndex++)
+                    {
+                        if (results[i] == true)
+                        {
+                            i++;
+                            context.Votes.Add(new Votes() { PollId = pollId, UserId = userId, OptionId = options[optionsIndex].Id });
+                        }
+                    }
+                }
+                else
+                {
+                    context.Votes.Add(new Votes() { PollId = pollId, UserId = userId, OptionId = Convert.ToInt32(formCollection["radioResults"].ToString()) });
+                }
+                context.SaveChanges();
+            }
+
+            return Redirect("/Polls/Vote/" + pollId);
         }
+
+        #endregion
 
     }
 }
