@@ -118,3 +118,5 @@ C:\Users\Александр\Dropbox\VisualStudioProjects\TSJCommunication\TSJCom
 C:\Users\Александр\Dropbox\VisualStudioProjects\TSJCommunication\TSJCommunication\TSJCommunication\bin\Microsoft.Web.Helpers.dll
 C:\Users\Александр\Dropbox\VisualStudioProjects\TSJCommunication\TSJCommunication\TSJCommunication\bin\WebMatrix.Data.dll
 C:\Users\Александр\Dropbox\VisualStudioProjects\TSJCommunication\TSJCommunication\TSJCommunication\bin\WebMatrix.WebData.dll
+C:\Users\Александр\Dropbox\VisualStudioProjects\TSJCommunication\TSJCommunication\TSJCommunication\obj\Debug\TSJCommunication.Migrations.asd.resources
+C:\Users\Александр\Dropbox\VisualStudioProjects\TSJCommunication\TSJCommunication\TSJCommunication\obj\Debug\TSJCommunication.csproj.GenerateResource.cache

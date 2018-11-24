@@ -13,9 +13,9 @@ namespace TSJCommunication.Models
         public int Id { get; set; }
 
         /// <summary>
-        /// Id проголосовавшего пользователя из таблицы Users
+        /// User.Identity.Name
         /// </summary>
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
         /// <summary>
         /// Id опроса из таблицы

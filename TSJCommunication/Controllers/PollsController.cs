@@ -10,8 +10,9 @@ namespace TSJCommunication.Controllers
 {
     public class PollsController : Controller
     {
-        private int userId = 0;
+        //private int userId = 0;
 
+        [Authorize]
         public ActionResult Index()
         {
             if (Request.Url.AbsolutePath == "/Polls/Index" || Request.Url.AbsolutePath == "/polls")
@@ -67,7 +68,7 @@ namespace TSJCommunication.Controllers
                 ViewBag.Poll = context.Polls.FirstOrDefault(c => c.Id == id);
                 ViewBag.Options = context.Options.Where(c => c.PollId == id).OrderBy(c => c.Id).ToList();
                 ViewBag.Votes = context.Votes.Where(c => c.PollId == id).ToList();
-                ViewBag.UserId = userId;
+                ViewBag.UserId = User.Identity.Name;
             }
             if (ViewBag.Poll == null || ViewBag.Options == null) Redirect("/Polls");
 
@@ -88,13 +89,13 @@ namespace TSJCommunication.Controllers
                         if (results[i] == true)
                         {
                             i++;
-                            context.Votes.Add(new Votes() { PollId = pollId, UserId = userId, OptionId = options[optionsIndex].Id });
+                            context.Votes.Add(new Votes() { PollId = pollId, UserId = User.Identity.Name, OptionId = options[optionsIndex].Id });
                         }
                     }
                 }
                 else
                 {
-                    context.Votes.Add(new Votes() { PollId = pollId, UserId = userId, OptionId = Convert.ToInt32(formCollection["radioResults"].ToString()) });
+                    context.Votes.Add(new Votes() { PollId = pollId, UserId = User.Identity.Name, OptionId = Convert.ToInt32(formCollection["radioResults"].ToString()) });
                 }
                 context.SaveChanges();
             }
