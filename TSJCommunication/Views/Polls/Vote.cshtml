@@ -49,10 +49,19 @@ else
     <h2>@poll.Title</h2>
     <h3>@poll.Description</h3>
 
-    for (int i = 0; i < options.Count; i++)
+    if (votes.Count != 0)
     {
+        for (int i = 0; i < options.Count; i++)
+        {
         <div>
             @options[i].Value - <b>@(Math.Round((double)(votes.Where(c => c.OptionId == options[i].Id).Count() * 100 / (double)votes.Count), 2))%</b> @votes.Where(c => c.OptionId == options[i].Id).Count() голоса(ов)
+        </div>
+        }
+    }
+    else
+    {
+        <div>
+            Никто пока не проголосовал.
         </div>
     }
 }

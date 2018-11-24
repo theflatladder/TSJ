@@ -8,14 +8,21 @@
 
 <h2>POLLS</h2>
 
-<div style="padding-top:100px; padding-bottom: 100px;">
-    <a href="/Polls/Add">NEW POLL</a>
-</div>
-
+@if (User.IsInRole("admin"))
+{
+    <div style="padding-top:100px; padding-bottom: 100px;">
+        <a href="/Polls/Add">NEW POLL</a>
+    </div>
+}
 @foreach (var poll in polls)
 {
     <div>
         <a href="/Polls/Vote/@poll.Id">@poll.Title</a>
+
+        @if (User.IsInRole("admin"))
+        {
+            <a href="/Polls/Delete/@poll.Id"> x </a>
+        }
     </div>
 }
 

@@ -27,9 +27,10 @@ namespace TSJCommunication.Controllers
             return View();
         }
 
-        
+
         #region Add
 
+        [Authorize(Roles = "admin")]
         public ActionResult Add()
         {
             return View();
@@ -54,10 +55,11 @@ namespace TSJCommunication.Controllers
         }
 
         #endregion
-        
+
 
         #region Vote
 
+        [Authorize]
         public ActionResult Vote(int? id = null)
         {
             using (DataContext context = new DataContext())
@@ -102,5 +104,22 @@ namespace TSJCommunication.Controllers
 
         #endregion
 
+
+        #region Delete
+
+        [Authorize(Roles = "admin")]
+        public ActionResult Delete(int? id)
+        {
+            using (DataContext context = new DataContext())
+            {
+                var poll = context.Polls.FirstOrDefault(c => c.Id == id);
+                if (poll != null) context.Polls.Remove(poll);
+                context.SaveChanges();
+            }
+
+            return Redirect("/Polls");
+        }
+
+        #endregion
     }
 }
