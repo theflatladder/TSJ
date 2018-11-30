@@ -5,7 +5,7 @@
     List<TSJCommunication.Models.Polls> polls = (List<TSJCommunication.Models.Polls>)ViewBag.Polls;
 
     bool admin = false;
-    try //тут крч магия - пишет ошибка, нет связи с БД, рестаришь комп и все работает, так что оставляю try-catch
+    try
     {
         admin = User.IsInRole("admin");
     }

@@ -125,9 +125,10 @@ namespace TSJCommunication.Controllers
 
         #endregion
 
-        #region Suggestions
 
-        [Authorize]
+        #region Suggestions
+        
+        [Authorize(Roles = "admin")]
         public ActionResult Suggestions()
         {
             List<UserSuggestion> suggestions = null;
@@ -139,6 +140,8 @@ namespace TSJCommunication.Controllers
 
             return View();
         }
+
+
 
         [Authorize]
         public ActionResult MakeSuggestion()
@@ -160,6 +163,19 @@ namespace TSJCommunication.Controllers
             return Redirect("/Polls");
         }
 
+
+        [Authorize(Roles = "admin")]
+        public ActionResult DeleteSuggestion(int? id)
+        {
+            using (DataContext context = new DataContext())
+            {
+                var sugg = context.UserSuggestions.FirstOrDefault(c => c.Id == id);
+                if (sugg != null) context.UserSuggestions.Remove(sugg);
+                context.SaveChanges();
+            }
+
+            return Redirect("/Polls/Suggestions");
+        }
 
         #endregion
     }

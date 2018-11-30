@@ -13,7 +13,7 @@
     foreach (var sugg in suggestions)
     {
         <div>
-            <div>@sugg.Title</div>
+            <div>@sugg.Title <a href="/Polls/DeleteSuggestion/@sugg.Id">УДАЛИТЬ</a></div>
             <div>@sugg.Description</div>
             <div>@sugg.Options</div>
         </div>
