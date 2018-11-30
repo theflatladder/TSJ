@@ -25,6 +25,6 @@ namespace TSJCommunication.Helpers
 
         public DbSet<Options> Options { get; set; }
 
-        
+        public DbSet<UserSuggestion> UserSuggestions { get; set; }
     }
 }

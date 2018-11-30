@@ -1,3 +1,9 @@
 ﻿@{
+    try
+    {
+        WebSecurity.InitializeDatabaseConnection("PrimaryConnectionString", "UserProfile", "UserId", "UserName", autoCreateTables: true);
+    }
+    catch { }
+
     Layout = "~/Views/Shared/_Layout.cshtml";
 }

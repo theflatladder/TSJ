@@ -1,0 +1,27 @@
+﻿@model TSJCommunication.Models.UserSuggestion
+@{
+    Layout = null;
+}
+
+<h4>Ваше предложение о голосовании</h4>
+
+@using (Html.BeginForm())
+{
+    <div>
+        @Html.LabelFor(m => m.Title, "Заголовок")
+        @Html.TextBoxFor(m => m.Title)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Description, "Описание")
+        @Html.TextAreaFor(m => m.Description)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Options, "Варианты ответов")
+        @Html.TextAreaFor(m => m.Options)
+    </div>
+    <br />
+    <input type="submit" value="Предложить" />
+}
+
+<br />
+<a href="/Polls">return to Polls</a>

@@ -200,10 +200,19 @@
     <Compile Include="Migrations\201811241617518_asd.Designer.cs">
       <DependentUpon>201811241617518_asd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811301444043_qweqwe.cs" />
+    <Compile Include="Migrations\201811301444043_qweqwe.Designer.cs">
+      <DependentUpon>201811301444043_qweqwe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811301522553_sugg.cs" />
+    <Compile Include="Migrations\201811301522553_sugg.Designer.cs">
+      <DependentUpon>201811301522553_sugg.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Options.cs" />
     <Compile Include="Models\Polls.cs" />
+    <Compile Include="Models\UserSuggestion.cs" />
     <Compile Include="Models\Votes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -294,6 +303,8 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Polls\MakeSuggestion.cshtml" />
+    <Content Include="Views\Polls\Suggestions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -312,6 +323,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201811241617518_asd.resx">
       <DependentUpon>201811241617518_asd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811301444043_qweqwe.resx">
+      <DependentUpon>201811301444043_qweqwe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811301522553_sugg.resx">
+      <DependentUpon>201811301522553_sugg.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,0 +1,28 @@
+﻿
+@{
+    Layout = null;
+    List<TSJCommunication.Models.UserSuggestion> suggestions = (List<TSJCommunication.Models.UserSuggestion>)ViewBag.UserSuggestions;
+}
+
+
+<h4>Предложения от пользователей</h4>
+
+
+@if (suggestions.Any())
+{
+    foreach (var sugg in suggestions)
+    {
+        <div>
+            <div>@sugg.Title</div>
+            <div>@sugg.Description</div>
+            <div>@sugg.Options</div>
+        </div>
+        <br />
+    }
+}
+else
+{
+    <h5>Пусто.</h5>
+}
+<br />
+<a href="/Polls">return to Polls</a>

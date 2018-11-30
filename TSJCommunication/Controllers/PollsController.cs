@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using TSJCommunication.Helpers;
 using TSJCommunication.Models;
+using WebMatrix.WebData;
 
 namespace TSJCommunication.Controllers
 {
@@ -68,7 +69,8 @@ namespace TSJCommunication.Controllers
                 ViewBag.Poll = context.Polls.FirstOrDefault(c => c.Id == id);
                 ViewBag.Options = context.Options.Where(c => c.PollId == id).OrderBy(c => c.Id).ToList();
                 ViewBag.Votes = context.Votes.Where(c => c.PollId == id).ToList();
-                ViewBag.UserId = User.Identity.Name;
+                ViewBag.UserId = WebSecurity.CurrentUserId;
+                
             }
             if (ViewBag.Poll == null || ViewBag.Options == null) Redirect("/Polls");
 
@@ -89,13 +91,13 @@ namespace TSJCommunication.Controllers
                         if (results[i] == true)
                         {
                             i++;
-                            context.Votes.Add(new Votes() { PollId = pollId, UserId = User.Identity.Name, OptionId = options[optionsIndex].Id });
+                            context.Votes.Add(new Votes() { PollId = pollId, UserId = WebSecurity.CurrentUserId, OptionId = options[optionsIndex].Id });
                         }
                     }
                 }
                 else
                 {
-                    context.Votes.Add(new Votes() { PollId = pollId, UserId = User.Identity.Name, OptionId = Convert.ToInt32(formCollection["radioResults"].ToString()) });
+                    context.Votes.Add(new Votes() { PollId = pollId, UserId = WebSecurity.CurrentUserId, OptionId = Convert.ToInt32(formCollection["radioResults"].ToString()) });
                 }
                 context.SaveChanges();
             }
@@ -120,6 +122,44 @@ namespace TSJCommunication.Controllers
 
             return Redirect("/Polls");
         }
+
+        #endregion
+
+        #region Suggestions
+
+        [Authorize]
+        public ActionResult Suggestions()
+        {
+            List<UserSuggestion> suggestions = null;
+            using (DataContext context = new DataContext())
+            {
+                suggestions = context.UserSuggestions.ToList();
+            }
+            ViewBag.UserSuggestions = suggestions;
+
+            return View();
+        }
+
+        [Authorize]
+        public ActionResult MakeSuggestion()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult MakeSuggestion(UserSuggestion newSuggestion)
+        {
+            using (DataContext context = new DataContext())
+            {
+                newSuggestion.UserId = WebSecurity.CurrentUserId;
+                context.UserSuggestions.Add(newSuggestion);
+                context.SaveChanges();
+            }
+
+            return Redirect("/Polls");
+        }
+
 
         #endregion
     }
